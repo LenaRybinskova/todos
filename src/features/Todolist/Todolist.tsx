@@ -2,22 +2,20 @@ import {useEffect, useReducer, useState} from 'react';
 import styles from './todolist.module.scss'
 import {addTaskAC, clearCompletedTasksAC, Filter, initState, todolistReducer} from '../Todolist/todolistReducer';
 import {Input} from '../../common/components/Input/input';
-
+import {FilterButton} from '../../common/components/FilterButton/FilterButton';
+import {Task} from '../Task/Task';
 
 
 export const Todolist = () => {
     const [filter, setFilter] = useState<Filter>('all')
+
     const [state, dispatch] = useReducer(todolistReducer, initState);
-    console.log("state", state)
+    //console.log("state", state)
 
     const addTaskHandler = (taskTitle: string) => {
-            dispatch(addTaskAC(taskTitle));
+        dispatch(addTaskAC(taskTitle));
     };
 
-
-    const toggleTodo = (id: number) => {
-        setTodos(todos.map((todo) => (todo.id === id ? {...todo, status: !todo.status} : todo)))
-    }
 
     const clearCompletedHandler = () => {
         dispatch(clearCompletedTasksAC())
@@ -29,6 +27,15 @@ export const Todolist = () => {
         return true
     })
 
+    const filteredHandler = (filterValue: Filter) => {
+        console.log('filter', filterValue)
+        setFilter(filterValue)
+    }
+
+    const changeTaskStatusHandler=()=>{
+
+    }
+
     const activeCount = state.filter((todo) => !todo.isCompleted).length
     return (
         <div className={styles.container}>
@@ -39,6 +46,8 @@ export const Todolist = () => {
 
                     {filteredTodos.map((todo) => (
                         <div key={todo.id} className={styles.todoItem}>
+                            <Task key={todo.id} text={todo.text} checked={todo.isCompleted} callback={changeTaskStatusHandler}/>
+
                             <button
                                 onClick={() => toggleTodo(todo.id)}
                                 className={`${styles.checkbox} ${todo.isCompleted ? styles.completed : ''}`}
@@ -55,7 +64,10 @@ export const Todolist = () => {
                     <span className={styles.itemCount}>{activeCount} items left</span>
 
                     <div className={styles.filters}>
-                        <button
+                        <FilterButton label={'all'} callBack={filteredHandler}/>
+                        <FilterButton label={'active'} callBack={filteredHandler}/>
+                        <FilterButton label={'completed'} callBack={filteredHandler}/>
+                        {/* <button
                             onClick={() => setFilter('all')}
                             className={`${styles.filterBtn} ${filter === 'all' ? styles.active : ''}`}
                         >
@@ -72,7 +84,7 @@ export const Todolist = () => {
                             className={`${styles.filterBtn} ${filter === 'completed' ? styles.active : ''}`}
                         >
                             Completed
-                        </button>
+                        </button>*/}
                     </div>
 
                     <button onClick={clearCompletedHandler} className={styles.clearBtn}>

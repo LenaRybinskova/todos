@@ -10,7 +10,7 @@ export type Filter = "all" | "active" | "completed"
 
 const ADD_TASK = 'ADD_TASK'
 const CLEAR_COMPLETED_TASKS = 'CLEAR_COMPLETED_TASKS'
-const CHANGE_FILTER = 'CHANGE_FILTER'
+const CHANGE_TASK_STATUS = 'CHANGE_TASK_STATUS'
 
 export const initState: Todo[] = [
     {id: 1, text: 'Тестовое задание', isCompleted: true},
@@ -23,9 +23,9 @@ export function todolistReducer(state: Todo[] = initState, action: any) {
         case ADD_TASK:
             const id = uuidv4();
             return [...state, {id:id, text:action.payload.titleTask, isCompleted: false}];
-/*
-        case CHANGE_FILTER:
-            return [...state.filter(task =>task.status !== action.payload)];*/
+
+        case CHANGE_TASK_STATUS:
+            return [...state.map(task=> task.id === id?{...task, text:action.payload} : task)];
 
         case CLEAR_COMPLETED_TASKS:
             return [...state.filter(task =>task.isCompleted ===false)];
@@ -40,6 +40,13 @@ export const addTaskAC = (titleTask: string) => {
     return {
         type: ADD_TASK,
         payload: { titleTask }
+    } as const;
+}
+
+export const changeTaksStatusAC = (status:boolean) => {
+    return {
+        type: CHANGE_TASK_STATUS,
+        payload: { status }
     } as const;
 }
 

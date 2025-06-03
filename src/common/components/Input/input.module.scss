@@ -1,0 +1,100 @@
+.inputWrapper {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ededed;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  width: 20px;
+  height: 20px;
+  color: #e6e6e6;
+  z-index: 1;
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+
+
+  .input:focus + & {
+    transform: rotate(180deg);
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 16px 16px 16px 20px;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  border: none;
+  outline: none;
+  color: #4d4d4d;
+  background: transparent;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    font-style: italic;
+    font-weight: 300;
+    color: #e6e6e6;
+  }
+
+  &:focus {
+    background-color: #fafafa;
+
+    &::placeholder {
+      color: #d0d0d0;
+    }
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    -webkit-text-fill-color: #4d4d4d;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@media (max-width: 768px) {
+  .input {
+    font-size: 18px;
+    padding: 12px 12px 12px 45px;
+  }
+
+  .inputIcon {
+    left: 12px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input {
+    font-size: 16px;
+    padding: 10px 10px 10px 40px;
+  }
+
+  .inputIcon {
+    left: 10px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.inputContainer:hover .inputIcon {
+  color: #d0d0d0;
+}
+
+.input:not(:placeholder-shown) + .inputIcon {
+  color: #c0c0c0;
+}

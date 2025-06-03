@@ -1,0 +1,48 @@
+.checkbox {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #dcdcdc;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 12px;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::after {
+    content: '✓';
+    color: #94c2b7;
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.completed {
+  border-color: #94c2b7;
+
+  &::after {
+    opacity: 1;
+  }
+}
+
+.todoText {
+  font-size: 18px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.completedText {
+  color: #dcdcdc;
+  text-decoration: line-through;
+}

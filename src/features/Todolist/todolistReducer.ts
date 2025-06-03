@@ -18,7 +18,7 @@ export const initState: Todo[] = [
     {id: "3", text: 'Покрытие тестами', isCompleted: false},
 ]
 
-export function todolistReducer(state: Todo[] = initState, action: any) {
+export function todolistReducer(state: Todo[] = initState, action: TodolustReducerType) {
     switch (action.type) {
         case ADD_TASK:
             const id = uuidv4();
@@ -55,3 +55,9 @@ export const clearCompletedTasksAC = () => {
         type: CLEAR_COMPLETED_TASKS,
     } as const;
 }
+
+type AddTaskType=ReturnType<typeof addTaskAC>
+type ChangeTaksStatusType=ReturnType<typeof changeTaksStatusAC>
+type ClearCompletedTasksTYpe=ReturnType<typeof clearCompletedTasksAC>
+
+type TodolustReducerType=AddTaskType | ChangeTaksStatusType | ClearCompletedTasksTYpe

@@ -15,14 +15,11 @@ import {Task} from '../Task/Task';
 
 export const Todolist = () => {
     const [filter, setFilter] = useState<Filter>('all')
-
     const [state, dispatch] = useReducer(todolistReducer, initState);
-
 
     const addTaskHandler = (taskTitle: string) => {
         dispatch(addTaskAC(taskTitle));
     };
-
 
     const clearCompletedHandler = () => {
         dispatch(clearCompletedTasksAC())
@@ -48,32 +45,33 @@ export const Todolist = () => {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>todos</h1>
-            <Input callback={addTaskHandler}/>
-            <div className={styles.todoCard}>
-                <div className={styles.todoList}>
 
-                    {filteredTodos.map((todo) => (
-                        <div key={todo.id} className={styles.todoItem}>
-                            <Task id={todo.id} key={todo.id} text={todo.text} checked={todo.isCompleted}
-                                  callback={changeTaskStatusHandler}/>
-                        </div>
-                    ))}
-                </div>
+                <Input callback={addTaskHandler}/>
+                <div className={styles.todoCard}>
+                    <div className={styles.todoList}>
 
-                <div className={styles.footer}>
-                    <span className={styles.itemCount}>{activeCount} items left</span>
-
-                    <div className={styles.filters}>
-                        <FilterButton label={'all'} callBack={filteredHandler}/>
-                        <FilterButton label={'active'} callBack={filteredHandler}/>
-                        <FilterButton label={'completed'} callBack={filteredHandler}/>
+                        {filteredTodos.map((todo) => (
+                            <div key={todo.id} className={styles.todoItem}>
+                                <Task id={todo.id} key={todo.id} text={todo.text} checked={todo.isCompleted}
+                                      callback={changeTaskStatusHandler}/>
+                            </div>
+                        ))}
                     </div>
 
-                    <button onClick={clearCompletedHandler} className={styles.clearBtn}>
-                        Clear completed
-                    </button>
+                    <div className={styles.footer}>
+                        <span className={styles.itemCount}>{activeCount} items left</span>
+
+                        <div className={styles.filterGroup}>
+                            <FilterButton label={'all'} callBack={filteredHandler} currentFilter={filter}/>
+                            <FilterButton label={'active'} callBack={filteredHandler} currentFilter={filter}/>
+                            <FilterButton label={'completed'} callBack={filteredHandler} currentFilter={filter}/>
+                        </div>
+
+                        <button onClick={clearCompletedHandler} className={styles.clearBtn}>
+                            Clear completed
+                        </button>
+                    </div>
                 </div>
-            </div>
         </div>
     )
 }

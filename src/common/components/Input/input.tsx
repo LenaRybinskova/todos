@@ -1,5 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 import  { KeyboardEvent,  FocusEvent  } from 'react';
+import styles from "./input.module.scss"
 
 type Props = {
     callback: (newValue: string) => void;
@@ -26,15 +27,18 @@ export const Input = ({callback}: Props) => {
     };
 
     return (
-        <div >
-            <input
-                type="text"
-                placeholder="What needs to be done?"
-                value={value}
-                onChange={onChangeHandler}
-                onBlur={onBlurHandler}
-                onKeyDown={onKeyDownHandler}
-            />
+        <div className={styles.inputWrapper}>
+            <div className={styles.inputContainer}>
+                <input
+                    type="text"
+                    placeholder="What needs to be done?"
+                    value={value}
+                    onChange={onChangeHandler}
+                    onBlur={onBlurHandler}
+                    onKeyDown={onKeyDownHandler}
+                    className={styles.input}
+                />
+            </div>
         </div>
     )
 }

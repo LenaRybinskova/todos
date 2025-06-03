@@ -1,10 +1,10 @@
 .container {
-  min-height: 100vh;
   background-color: #f5f5f5;
-  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 500px;
 }
 
 .title {
@@ -20,9 +20,10 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 100% !important;
   max-width: 550px;
   overflow: hidden;
+
 }
 
 .inputForm {
@@ -65,12 +66,13 @@
 
 .todoList {
   border-bottom: 1px solid #ededed;
+
 }
 
 .todoItem {
   display: flex;
   align-items: center;
-  padding: 15px 15px 15px 60px;
+  padding: 15px 15px 15px 20px;
   border-bottom: 1px solid #ededed;
   position: relative;
 

@@ -1,14 +1,11 @@
 import {Todolist} from '../src/features/Todolist/Todolist';
-//import styles './App.css'
+
+import './App.css'
 
 function App() {
-
-
-  return (
-    <>
-     <Todolist/>
-    </>
-  )
+    return (
+        <Todolist/>
+    )
 }
 
 export default App

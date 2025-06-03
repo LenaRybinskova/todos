@@ -6,15 +6,16 @@ import {Filter} from '../../../features/Todolist/todolistReducer';
 type Props = {
     label: Filter
     callBack: (label: Filter) => void
+    currentFilter:Filter
 }
 
-export const FilterButton = ({label, callBack}: Props) => {
+export const FilterButton = ({label, callBack,currentFilter}: Props) => {
 
     const onClickHandler = () => {
         console.log("label", label)
         callBack(label)
     }
     return (
-        <button onClick={onClickHandler}>{label}</button>
+        <button onClick={onClickHandler} className={`${styles.filterButton} ${currentFilter=== label? styles.active : ""}`}>{label}</button>
     )
 }

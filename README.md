@@ -13,3 +13,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 
 npm create vite@latest my-app -- --template react
+npm install --save-dev gh-pages
